@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayoutLivro"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.fragment_livro">
+
+    <TextView
+        android:id="@+id/textViewLivroTitulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:gravity="center_horizontal"
+        android:text="@string/rotulo_livro"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewLivroIdRotulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/rotulo_identificacao_exemplar"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/editTextLivroId"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewLivroTitulo" />
+
+    <EditText
+        android:id="@+id/editTextLivroId"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/id_exemplar"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textViewLivroIdRotulo"
+        app:layout_constraintTop_toTopOf="@+id/textViewLivroIdRotulo" />
+
+    <Button
+        android:id="@+id/buttonPesquisarLivro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/pesquisar_bd"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextLivroId" />
+
+    <TextView
+        android:id="@+id/textViewLivroResultado"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="Resultados serão exibidos aqui"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonPesquisarLivro" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

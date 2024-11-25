@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayoutEmprestimo"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.fragment_emprestimo">
+
+    <TextView
+        android:id="@+id/textViewEmprestimoTitulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/rotulo_aluguel"
+        android:textAlignment="center"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewEmprestimoAlunoRotulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/rotulo_aluno"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/spinnerAluno"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewEmprestimoTitulo" />
+
+    <Spinner
+        android:id="@+id/spinnerAluno"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textViewEmprestimoAlunoRotulo"
+        app:layout_constraintTop_toTopOf="@+id/textViewEmprestimoAlunoRotulo" />
+
+    <Button
+        android:id="@+id/buttonPesquisarEmprestimo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/pesquisar_bd"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerAluno" />
+
+    <TextView
+        android:id="@+id/textViewEmprestimoResultado"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="Resultados serão exibidos aqui"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonPesquisarEmprestimo" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
