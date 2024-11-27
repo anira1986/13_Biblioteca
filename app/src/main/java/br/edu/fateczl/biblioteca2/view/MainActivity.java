@@ -1,3 +1,9 @@
+/**
+ *@author:<ANA PAULA DE OLIVEIRA SILVA>
+ *RA1110482123028
+ *ANA PAULA DE OLIVEIRA SILVA
+ */
+
 package br.edu.fateczl.biblioteca.view;
 
 import android.os.Bundle;
@@ -32,10 +38,8 @@ public class MainActivity extends AppCompatActivity {
                         .commit();
                 return true;
             case R.id.itemLivro:
-                // Exemplo de navegação para o fragmento de Livro
                 return true;
             case R.id.itemRevista:
-                // Exemplo de navegação para o fragmento de Revista
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
