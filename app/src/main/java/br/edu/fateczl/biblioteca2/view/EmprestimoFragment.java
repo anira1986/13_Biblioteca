@@ -4,13 +4,9 @@
  *ANA PAULA DE OLIVEIRA SILVA
  */
 
-
 package br.edu.fateczl.biblioteca.view;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +16,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.fragment.app.Fragment;
 
 import br.edu.fateczl.biblioteca.R;
 import br.edu.fateczl.biblioteca.controller.AlunoController;
@@ -43,10 +41,8 @@ import java.util.List;
 
 public class EmprestimoFragment extends Fragment {
     private View view;
-    private Spinner spinnerAluno;
-    private Spinner spinnerExemplar;
-    private EditText editTextDataRetirada;
-    private EditText editTextDataDevolucao;
+    private Spinner spinnerAluno, spinnerExemplar;
+    private EditText editTextDataRetirada, editTextDataDevolucao;
     private TextView textViewSaidaEmprestimo;
     private EmprestimoController emprestimoController;
     private AlunoController alunoController;
@@ -60,141 +56,118 @@ public class EmprestimoFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_emprestimo, container, false);
 
+        initializeViews();
+        setupControllers();
+        loadSpinners();
+
+        setButtonListeners();
+
+        return view;
+    }
+
+    private void initializeViews() {
         spinnerAluno = view.findViewById(R.id.spinnerAluno);
         spinnerExemplar = view.findViewById(R.id.spinnerExemplar);
         editTextDataRetirada = view.findViewById(R.id.editTextDataRetirada);
         editTextDataDevolucao = view.findViewById(R.id.editTextDataDevolucao);
         textViewSaidaEmprestimo = view.findViewById(R.id.textViewSaidaEmprestimo);
         textViewSaidaEmprestimo.setMovementMethod(new ScrollingMovementMethod());
+    }
 
+    private void setupControllers() {
         emprestimoController = new EmprestimoController(new EmprestimoDAO(this.getContext()));
         alunoController = new AlunoController(new AlunoDAO(this.getContext()));
         livroController = new LivroController(new LivroDAO(this.getContext()));
         revistaController = new RevistaController(new RevistaDAO(this.getContext()));
-
-        carregarSpinnerAluno();
-        carregarSpinnerExemplar();
-
-        view.findViewById(R.id.buttonBuscarEmprestimo).setOnClickListener(buscar -> buscarRegistro());
-        view.findViewById(R.id.buttonRegistrarEmprestimo).setOnClickListener(registrar -> registrarRegistro());
-        view.findViewById(R.id.buttonAtualizarEmprestimo).setOnClickListener(atualizar -> atualizarRegistro());
-        view.findViewById(R.id.buttonRemoverEmprestimo).setOnClickListener(remover -> removerRegistro());
-        view.findViewById(R.id.buttonListarEmprestimos).setOnClickListener(listar -> listarRegistros());
-
-        return view;
     }
 
-    private void carregarSpinnerAluno() {
-        AlunoBiblioteca alunoInicial = new AlunoBiblioteca(0, "Selecione o Aluno", null);
-        List<AlunoBiblioteca> alunosOpcoes = new ArrayList<>();
+    private void loadSpinners() {
+        loadSpinnerAluno();
+        loadSpinnerExemplar();
+    }
 
+    private void loadSpinnerAluno() {
         try {
             alunos = alunoController.listarRegistros();
-            alunosOpcoes.add(0, alunoInicial);
-            alunosOpcoes.addAll(alunos);
+            alunos.add(0, new AlunoBiblioteca(0, "Selecione o Aluno", null));
 
-            ArrayAdapter<AlunoBiblioteca> arrayAdapter = new ArrayAdapter<>(
-                    view.getContext(), android.R.layout.simple_spinner_item, alunosOpcoes);
+            ArrayAdapter<AlunoBiblioteca> arrayAdapter = new ArrayAdapter<>(view.getContext(), android.R.layout.simple_spinner_item, alunos);
             arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinnerAluno.setAdapter(arrayAdapter);
-
         } catch (SQLException e) {
-            Toast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+            showToast(e.getMessage());
         }
     }
 
-    private void carregarSpinnerExemplar() {
-        RevistaBiblioteca revistaInicial = new RevistaBiblioteca(0, "Selecione o Exemplar", 0, null);
-        List<ExemplarBiblioteca> exemplaresOpcoes = new ArrayList<>();
-
+    private void loadSpinnerExemplar() {
         try {
             exemplares = new ArrayList<>();
             exemplares.addAll(livroController.listarRegistros());
             exemplares.addAll(revistaController.listarRegistros());
 
-            exemplaresOpcoes.add(0, revistaInicial);
-            exemplaresOpcoes.addAll(exemplares);
+            exemplares.add(0, new RevistaBiblioteca(0, "Selecione o Exemplar", 0, null));
 
-            ArrayAdapter<ExemplarBiblioteca> arrayAdapter = new ArrayAdapter<>(
-                    view.getContext(), android.R.layout.simple_spinner_item, exemplaresOpcoes);
+            ArrayAdapter<ExemplarBiblioteca> arrayAdapter = new ArrayAdapter<>(view.getContext(), android.R.layout.simple_spinner_item, exemplares);
             arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinnerExemplar.setAdapter(arrayAdapter);
-
         } catch (SQLException e) {
-            Toast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+            showToast(e.getMessage());
         }
     }
 
-    private void buscarRegistro() {
-        EmprestimoBiblioteca emprestimo;
+    private void setButtonListeners() {
+        view.findViewById(R.id.buttonBuscarEmprestimo).setOnClickListener(v -> buscarRegistro());
+        view.findViewById(R.id.buttonRegistrarEmprestimo).setOnClickListener(v -> registrarRegistro());
+        view.findViewById(R.id.buttonAtualizarEmprestimo).setOnClickListener(v -> atualizarRegistro());
+        view.findViewById(R.id.buttonRemoverEmprestimo).setOnClickListener(v -> removerRegistro());
+        view.findViewById(R.id.buttonListarEmprestimos).setOnClickListener(v -> listarRegistros());
+    }
 
+    private void buscarRegistro() {
         try {
-            emprestimo = emprestimoController.buscarRegistro(new EmprestimoBiblioteca(
-                    (AlunoBiblioteca) spinnerAluno.getSelectedItem(),
-                    obterExemplar(),
-                    LocalDate.parse(editTextDataRetirada.getText().toString())));
+            EmprestimoBiblioteca emprestimo = emprestimoController.buscarRegistro(createEmprestimoFromFields());
 
             if (emprestimo.getAluno().getNome() != null) {
                 preencherCampos(emprestimo);
-
             } else {
-                Toast.makeText(
-                        view.getContext(), "Empréstimo não encontrado", Toast.LENGTH_LONG).show();
-
+                showToast("Empréstimo não encontrado");
                 limparCampos();
             }
         } catch (SQLException e) {
-            Toast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+            showToast(e.getMessage());
         }
     }
 
     private void registrarRegistro() {
         try {
-            emprestimoController.registrarRegistro(escreverEmprestimo());
-
-            Toast.makeText(
-                    view.getContext(), "Empréstimo registrado com sucesso", Toast.LENGTH_LONG).show();
-
+            emprestimoController.registrarRegistro(createEmprestimoFromFields());
+            showToast("Empréstimo registrado com sucesso");
         } catch (SQLException e) {
-            Toast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+            showToast(e.getMessage());
         }
-
         limparCampos();
     }
 
     private void atualizarRegistro() {
         try {
-            emprestimoController.atualizarRegistro(escreverEmprestimo());
-
-            Toast.makeText(
-                    view.getContext(), "Empréstimo atualizado com sucesso", Toast.LENGTH_LONG).show();
-
+            emprestimoController.atualizarRegistro(createEmprestimoFromFields());
+            showToast("Empréstimo atualizado com sucesso");
         } catch (SQLException e) {
-            Toast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+            showToast(e.getMessage());
         }
-
         limparCampos();
     }
 
     private void removerRegistro() {
         try {
-            emprestimoController.removerRegistro(new EmprestimoBiblioteca(
-                    (AlunoBiblioteca) spinnerAluno.getSelectedItem(),
-                    obterExemplar(),
-                    LocalDate.parse(editTextDataRetirada.getText().toString()))
-            );
-
-            Toast.makeText(
-                    view.getContext(), "Empréstimo removido com sucesso", Toast.LENGTH_LONG).show();
-
+            emprestimoController.removerRegistro(createEmprestimoFromFields());
+            showToast("Empréstimo removido com sucesso");
         } catch (SQLException e) {
-            Toast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+            showToast(e.getMessage());
         }
-
         limparCampos();
     }
 
@@ -203,19 +176,17 @@ public class EmprestimoFragment extends Fragment {
             List<EmprestimoBiblioteca> emprestimos = emprestimoController.listarRegistros();
 
             StringBuilder stringBuffer = new StringBuilder();
-
             for (EmprestimoBiblioteca emprestimo : emprestimos) {
                 stringBuffer.append(emprestimo.toString()).append("\n");
             }
 
             textViewSaidaEmprestimo.setText(stringBuffer.toString());
-
         } catch (SQLException e) {
-            Toast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+            showToast(e.getMessage());
         }
     }
 
-    private EmprestimoBiblioteca escreverEmprestimo() throws SQLException {
+    private EmprestimoBiblioteca createEmprestimoFromFields() throws SQLException {
         if (!validarCampos()) {
             throw new SQLException("Entrada inválida");
         }
@@ -229,23 +200,8 @@ public class EmprestimoFragment extends Fragment {
     }
 
     private boolean validarCampos() {
-        if (editTextDataRetirada.length() == 0) {
-            return false;
-        }
-
-        if (editTextDataDevolucao.length() == 0) {
-            return false;
-        }
-
-        if (spinnerAluno.getSelectedItemPosition() == 0) {
-            return false;
-        }
-
-        if (spinnerExemplar.getSelectedItemPosition() == 0) {
-            return false;
-        }
-
-        return true;
+        return editTextDataRetirada.length() > 0 && editTextDataDevolucao.length() > 0 &&
+                spinnerAluno.getSelectedItemPosition() != 0 && spinnerExemplar.getSelectedItemPosition() != 0;
     }
 
     private ExemplarBiblioteca obterExemplar() {
@@ -257,38 +213,24 @@ public class EmprestimoFragment extends Fragment {
     }
 
     private void preencherCampos(EmprestimoBiblioteca emprestimo) {
-        definirSpinnerAlunoId(emprestimo);
-        definirSpinnerExemplarId(emprestimo);
+        setSpinnerSelection(spinnerAluno, emprestimo.getAluno().getId(), alunos);
+        setSpinnerSelection(spinnerExemplar, emprestimo.getExemplar().getId(), exemplares);
+
         editTextDataRetirada.setText(String.valueOf(emprestimo.getDataRetirada()));
         editTextDataDevolucao.setText(String.valueOf(emprestimo.getDataDevolucao()));
     }
 
-    private void definirSpinnerAlunoId(EmprestimoBiblioteca emprestimo) {
-        int i = 1;
-        for (AlunoBiblioteca aluno : alunos) {
-            if (aluno.getId() == emprestimo.getAluno().getId()) {
-                spinnerAluno.setSelection(i);
-            } else {
-                i++;
+    private void setSpinnerSelection(Spinner spinner, int id, List<?> list) {
+        int i = 0;
+        for (Object item : list) {
+            if ((item instanceof AlunoBiblioteca && ((AlunoBiblioteca) item).getId() == id) ||
+                    (item instanceof ExemplarBiblioteca && ((ExemplarBiblioteca) item).getId() == id)) {
+                spinner.setSelection(i + 1);
+                return;
             }
+            i++;
         }
-        if (i > alunos.size()) {
-            spinnerAluno.setSelection(0);
-        }
-    }
-
-    private void definirSpinnerExemplarId(EmprestimoBiblioteca emprestimo) {
-        int i = 1;
-        for (ExemplarBiblioteca exemplar : exemplares) {
-            if (exemplar.getId() == emprestimo.getExemplar().getId()) {
-                spinnerExemplar.setSelection(i);
-            } else {
-                i++;
-            }
-        }
-        if (i > exemplares.size()) {
-            spinnerExemplar.setSelection(0);
-        }
+        spinner.setSelection(0);
     }
 
     private void limparCampos() {
@@ -298,4 +240,10 @@ public class EmprestimoFragment extends Fragment {
         editTextDataDevolucao.setText("");
     }
 
+    private void showToast(String message) {
+        Toast.makeText(view.getContext(), message, Toast.LENGTH_LONG).show();
+    }
 }
+
+
+

@@ -4,7 +4,6 @@
  *ANA PAULA DE OLIVEIRA SILVA
  */
 
-
 package br.edu.fateczl.biblioteca.model;
 
 import androidx.annotation.NonNull;
@@ -17,9 +16,7 @@ public class EmprestimoBiblioteca {
     private LocalDate dataRetirada;
     private LocalDate dataDevolucao;
 
-    public EmprestimoBiblioteca() {
-        super();
-    }
+    public EmprestimoBiblioteca() {}
 
     public EmprestimoBiblioteca(AlunoBiblioteca aluno, ExemplarBiblioteca exemplar, LocalDate dataRetirada) {
         this.aluno = aluno;
@@ -69,9 +66,7 @@ public class EmprestimoBiblioteca {
     @NonNull
     @Override
     public String toString() {
-        return "Emprestimo {" +
-                "Aluno='" + aluno.getNome() + "', " +
-                "Exemplar='" + exemplar.getNome() + "', " +
-                "Data Retirada='" + dataRetirada + "'}";
+        return String.format("Emprestimo {Aluno='%s', Exemplar='%s', Data Retirada='%s'}",
+                aluno.getNome(), exemplar.getNome(), dataRetirada);
     }
 }

@@ -4,7 +4,6 @@
  *ANA PAULA DE OLIVEIRA SILVA
  */
 
-
 package br.edu.fateczl.biblioteca.controller;
 
 import br.edu.fateczl.biblioteca.model.EmprestimoBiblioteca;
@@ -22,58 +21,51 @@ public class EmprestimoController implements IController<EmprestimoBiblioteca> {
 
     @Override
     public void adicionar(EmprestimoBiblioteca emprestimo) throws SQLException {
-        if (dao.abrir() == null) {
+        try {
             dao.abrir();
+            dao.adicionar(emprestimo);
+        } finally {
+            dao.fechar();
         }
-
-        dao.adicionar(emprestimo);
-
-        dao.fechar();
     }
 
     @Override
     public void atualizar(EmprestimoBiblioteca emprestimo) throws SQLException {
-        if (dao.abrir() == null) {
+        try {
             dao.abrir();
+            dao.atualizar(emprestimo);
+        } finally {
+            dao.fechar();
         }
-
-        dao.atualizar(emprestimo);
-
-        dao.fechar();
     }
 
     @Override
     public void remover(EmprestimoBiblioteca emprestimo) throws SQLException {
-        if (dao.abrir() == null) {
+        try {
             dao.abrir();
+            dao.remover(emprestimo);
+        } finally {
+            dao.fechar();
         }
-
-        dao.remover(emprestimo);
-
-        dao.fechar();
     }
 
     @Override
     public EmprestimoBiblioteca buscar(EmprestimoBiblioteca emprestimo) throws SQLException {
-        if (dao.abrir() == null) {
+        try {
             dao.abrir();
+            return dao.buscar(emprestimo);
+        } finally {
+            dao.fechar();
         }
-
-        EmprestimoBiblioteca resultado = dao.buscar(emprestimo);
-
-        dao.fechar();
-        return resultado;
     }
 
     @Override
     public List<EmprestimoBiblioteca> listar() throws SQLException {
-        if (dao.abrir() == null) {
+        try {
             dao.abrir();
+            return dao.listar();
+        } finally {
+            dao.fechar();
         }
-
-        List<EmprestimoBiblioteca> lista = dao.listar();
-
-        dao.fechar();
-        return lista;
     }
 }

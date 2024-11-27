@@ -4,8 +4,6 @@
  *ANA PAULA DE OLIVEIRA SILVA
  */
 
-
-
 package br.edu.fateczl.biblioteca.model;
 
 import androidx.annotation.NonNull;
@@ -48,6 +46,6 @@ public abstract class ExemplarBiblioteca {
     @NonNull
     @Override
     public String toString() {
-        return id + " - " + nome;
+        return String.format("%d - %s", id, nome);
     }
 }

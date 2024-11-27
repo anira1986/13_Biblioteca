@@ -4,23 +4,24 @@
  *ANA PAULA DE OLIVEIRA SILVA
  */
 
-
-
 package br.edu.fateczl.biblioteca.model;
 
-import androidx.annotation.NonNull;
-
+/**
+ * @author: ANA PAULA DE OLIVEIRA SILVA
+ */
 public class AlunoBiblioteca {
     private int id;
     private String nome;
     private String email;
 
+    // Construtores
     public AlunoBiblioteca(int id, String nome, String email) {
         this.id = id;
         this.nome = nome;
         this.email = email;
     }
 
+    // Getters e Setters
     public int getId() {
         return id;
     }
@@ -45,9 +46,8 @@ public class AlunoBiblioteca {
         this.email = email;
     }
 
-    @NonNull
     @Override
     public String toString() {
-        return id + " - " + nome;
+        return "Aluno: " + nome + ", Email: " + email;
     }
 }

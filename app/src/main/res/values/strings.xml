@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Biblioteca</string>
     <string name="texto_app">Bem-vindo!</string>
-    <string name="descricao_app">Gerencie seu aluguel de livros e revistas com facilidade usando o menu abaixo</string>
+    <string name="descricao_app">Gerencie seu aluguel de livros e revistas  usando o menu </string>
     <string name="pesquisar_bd">Pesquisar</string>
     <string name="registrar_bd">Registrar</string>
     <string name="atualizar_bd">Atualizar</string>

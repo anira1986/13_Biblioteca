@@ -1,10 +1,3 @@
-/**
- *@author:<ANA PAULA DE OLIVEIRA SILVA>
- *RA1110482123028
- *ANA PAULA DE OLIVEIRA SILVA
- */
-
-
 package br.edu.fateczl.biblioteca.persistence;
 
 import android.annotation.SuppressLint;
@@ -62,14 +55,16 @@ public class RevistaDAO implements IRevistaDAO, ICRUDDAO<RevistaBiblioteca> {
 
     @Override
     public void atualizar(RevistaBiblioteca revista) throws SQLException {
-        db.update("exemplar", getContentValues(revista, true), "id = ?", new String[]{String.valueOf(revista.getId())});
-        db.update("revista", getContentValues(revista, false), "idExemplar = ?", new String[]{String.valueOf(revista.getId())});
+        String[] args = { String.valueOf(revista.getId()) };
+        db.update("exemplar", getContentValues(revista, true), "id = ?", args);
+        db.update("revista", getContentValues(revista, false), "idExemplar = ?", args);
     }
 
     @Override
     public void remover(RevistaBiblioteca revista) throws SQLException {
-        db.delete("revista", "idExemplar = ?", new String[]{String.valueOf(revista.getId())});
-        db.delete("exemplar", "id = ?", new String[]{String.valueOf(revista.getId())});
+        String[] args = { String.valueOf(revista.getId()) };
+        db.delete("revista", "idExemplar = ?", args);
+        db.delete("exemplar", "id = ?", args);
     }
 
     @SuppressLint("Range")
@@ -79,7 +74,7 @@ public class RevistaDAO implements IRevistaDAO, ICRUDDAO<RevistaBiblioteca> {
                 "FROM exemplar INNER JOIN revista ON exemplar.id = revista.idExemplar " +
                 "WHERE exemplar.id = ?";
 
-        Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(revista.getId())});
+        Cursor cursor = db.rawQuery(query, new String[]{ String.valueOf(revista.getId()) });
 
         if (cursor.moveToFirst()) {
             revista.setId(cursor.getInt(cursor.getColumnIndex("id")));

@@ -9,8 +9,8 @@ package br.edu.fateczl.biblioteca.persistence;
 
 import java.sql.SQLException;
 
-public interface IAlunoDAO {
-    public AlunoDAO abrir() throws SQLException;
+public interface IRevistaDAO {
+    RevistaDAO abrir() throws SQLException;
 
-    public void fechar();
+    void fechar();
 }

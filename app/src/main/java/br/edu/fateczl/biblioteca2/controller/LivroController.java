@@ -5,7 +5,6 @@
  */
 
 
-
 package br.edu.fateczl.biblioteca.controller;
 
 import br.edu.fateczl.biblioteca.model.LivroBiblioteca;
@@ -22,58 +21,51 @@ public class LivroController implements IController<LivroBiblioteca> {
 
     @Override
     public void adicionar(LivroBiblioteca livro) throws SQLException {
-        if (dao.abrir() == null) {
+        try {
             dao.abrir();
+            dao.adicionar(livro);
+        } finally {
+            dao.fechar();
         }
-
-        dao.adicionar(livro);
-
-        dao.fechar();
     }
 
     @Override
     public void atualizar(LivroBiblioteca livro) throws SQLException {
-        if (dao.abrir() == null) {
+        try {
             dao.abrir();
+            dao.atualizar(livro);
+        } finally {
+            dao.fechar();
         }
-
-        dao.atualizar(livro);
-
-        dao.fechar();
     }
 
     @Override
     public void remover(LivroBiblioteca livro) throws SQLException {
-        if (dao.abrir() == null) {
+        try {
             dao.abrir();
+            dao.remover(livro);
+        } finally {
+            dao.fechar();
         }
-
-        dao.remover(livro);
-
-        dao.fechar();
     }
 
     @Override
     public LivroBiblioteca buscar(LivroBiblioteca livro) throws SQLException {
-        if (dao.abrir() == null) {
+        try {
             dao.abrir();
+            return dao.buscar(livro);
+        } finally {
+            dao.fechar();
         }
-
-        LivroBiblioteca resultado = dao.buscar(livro);
-
-        dao.fechar();
-        return resultado;
     }
 
     @Override
     public List<LivroBiblioteca> listar() throws SQLException {
-        if (dao.abrir() == null) {
+        try {
             dao.abrir();
+            return dao.listar();
+        } finally {
+            dao.fechar();
         }
-
-        List<LivroBiblioteca> lista = dao.listar();
-
-        dao.fechar();
-        return lista;
     }
 }

@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <item
-        android:id="@+id/itemLivro"
-        android:title="@string/rotulo_livro" />
-    <item
-        android:id="@+id/itemRevista"
-        android:title="@string/rotulo_revista" />
-    <item
-        android:id="@+id/itemAluguel"
-        android:title="@string/rotulo_aluguel" />
-    <item
-        android:id="@+id/itemAluno"
-        android:title="@string/rotulo_aluno" />
-
+<item
+    android:id="@+id/itemAluno"
+    android:title="Alunos" />
+<item
+    android:id="@+id/itemLivro"
+    android:title="Livros" />
+<item
+    android:id="@+id/itemRevista"
+    android:title="Revistas" />
 </menu>

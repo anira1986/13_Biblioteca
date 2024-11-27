@@ -10,7 +10,7 @@ package br.edu.fateczl.biblioteca.persistence;
 import java.sql.SQLException;
 
 public interface IEmprestimoDAO {
-    public EmprestimoDAO abrir() throws SQLException;
+    EmprestimoDAO abrir() throws SQLException;
 
-    public void fechar();
+    void fechar();
 }

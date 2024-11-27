@@ -1,4 +1,3 @@
-
 /**
  *@author:<ANA PAULA DE OLIVEIRA SILVA>
  *RA1110482123028
@@ -190,11 +189,9 @@ public class EmprestimoDAO implements IEmprestimoDAO, ICRUDDAO<EmprestimoBibliot
                     emprestimo.setExemplar(revista);
                 }
 
-                emprestimo.setDataRetirada(LocalDate.parse(
-                        cursor.getString(cursor.getColumnIndex("dataRetirada"))));
+                emprestimo.setDataRetirada(LocalDate.parse(cursor.getString(cursor.getColumnIndex("dataRetirada"))));
                 if (!cursor.isNull(cursor.getColumnIndex("dataDevolucao"))) {
-                    emprestimo.setDataDevolucao(LocalDate.parse(
-                            cursor.getString(cursor.getColumnIndex("dataDevolucao"))));
+                    emprestimo.setDataDevolucao(LocalDate.parse(cursor.getString(cursor.getColumnIndex("dataDevolucao"))));
                 }
 
                 emprestimos.add(emprestimo);

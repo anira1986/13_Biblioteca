@@ -4,10 +4,6 @@
  *ANA PAULA DE OLIVEIRA SILVA
  */
 
-
-package br.edu.fateczl.biblioteca.controller;
-
-import br.edu.fateczl.biblioteca.model.RevistaBiblioteca;
 import br.edu.fateczl.biblioteca.persistence.RevistaDAO;
 
 import java.sql.SQLException;
@@ -22,58 +18,51 @@ public class RevistaController implements IController<RevistaBiblioteca> {
 
     @Override
     public void adicionar(RevistaBiblioteca revista) throws SQLException {
-        if (dao.abrir() == null) {
+        try {
             dao.abrir();
+            dao.adicionar(revista);
+        } finally {
+            dao.fechar();
         }
-
-        dao.adicionar(revista);
-
-        dao.fechar();
     }
 
     @Override
     public void atualizar(RevistaBiblioteca revista) throws SQLException {
-        if (dao.abrir() == null) {
+        try {
             dao.abrir();
+            dao.atualizar(revista);
+        } finally {
+            dao.fechar();
         }
-
-        dao.atualizar(revista);
-
-        dao.fechar();
     }
 
     @Override
     public void remover(RevistaBiblioteca revista) throws SQLException {
-        if (dao.abrir() == null) {
+        try {
             dao.abrir();
+            dao.remover(revista);
+        } finally {
+            dao.fechar();
         }
-
-        dao.remover(revista);
-
-        dao.fechar();
     }
 
     @Override
     public RevistaBiblioteca buscar(RevistaBiblioteca revista) throws SQLException {
-        if (dao.abrir() == null) {
+        try {
             dao.abrir();
+            return dao.buscar(revista);
+        } finally {
+            dao.fechar();
         }
-
-        RevistaBiblioteca resultado = dao.buscar(revista);
-
-        dao.fechar();
-        return resultado;
     }
 
     @Override
     public List<RevistaBiblioteca> listar() throws SQLException {
-        if (dao.abrir() == null) {
+        try {
             dao.abrir();
+            return dao.listar();
+        } finally {
+            dao.fechar();
         }
-
-        List<RevistaBiblioteca> lista = dao.listar();
-
-        dao.fechar();
-        return lista;
     }
 }
