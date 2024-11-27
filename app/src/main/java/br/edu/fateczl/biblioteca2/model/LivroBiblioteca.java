@@ -13,7 +13,7 @@ public class LivroBiblioteca {
     private String isbn;
     private int edicao;
 
-    // Construtor
+
     public LivroBiblioteca(int id, String nome, int paginas, String isbn, int edicao) {
         this.id = id;
         this.nome = nome;
@@ -22,14 +22,14 @@ public class LivroBiblioteca {
         this.edicao = edicao;
     }
 
-    // Getters
+   
     public int getId() { return id; }
     public String getNome() { return nome; }
     public int getPaginas() { return paginas; }
     public String getIsbn() { return isbn; }
     public int getEdicao() { return edicao; }
 
-    // Setters
+
     public void setId(int id) { this.id = id; }
     public void setNome(String nome) { this.nome = nome; }
     public void setPaginas(int paginas) { this.paginas = paginas; }
