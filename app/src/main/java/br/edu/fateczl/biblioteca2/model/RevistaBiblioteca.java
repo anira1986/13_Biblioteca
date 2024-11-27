@@ -12,7 +12,7 @@ public class RevistaBiblioteca {
     private int exemplarPaginas;
     private String revistaISSN;
 
-    // Construtor
+
     public RevistaBiblioteca(int exemplarId, String exemplarNome, int exemplarPaginas, String revistaISSN) {
         this.exemplarId = exemplarId;
         this.exemplarNome = exemplarNome;
@@ -20,7 +20,7 @@ public class RevistaBiblioteca {
         this.revistaISSN = revistaISSN;
     }
 
-    // Getters
+
     public int getExemplarId() { return exemplarId; }
     public String getExemplarNome() { return exemplarNome; }
     public int getExemplarPaginas() { return exemplarPaginas; }
