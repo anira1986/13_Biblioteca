@@ -24,24 +24,23 @@ public class AlunoFragment extends Fragment {
     private AlunoController alunoController;
 
     public AlunoFragment() {
-        // Requerido para o Fragment, mas pode ser vazio
+    
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate o layout do fragmento
+      
         View view = inflater.inflate(R.layout.fragment_aluno, container, false);
 
-        // Referenciando os campos do layout
+       
         editTextAlunoNome = view.findViewById(R.id.editTextAlunoNome);
         editTextAlunoEmail = view.findViewById(R.id.editTextAlunoEmail);
         textViewAlunoSaida = view.findViewById(R.id.textViewAlunoSaida);
 
-        // Inicializando o Controller
         alunoController = new AlunoController(new AlunoDAO(getContext()));
 
-        // Configurando os botões
+       
         view.findViewById(R.id.buttonRegistrarAluno).setOnClickListener(v -> registrarAluno());
         view.findViewById(R.id.buttonBuscarAluno).setOnClickListener(v -> buscarAluno());
 
