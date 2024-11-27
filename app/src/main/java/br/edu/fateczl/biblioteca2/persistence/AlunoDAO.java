@@ -19,7 +19,7 @@ import java.util.ArrayList;
 public class AlunoDAO implements IAlunoDAO, ICRUDDAO<AlunoBiblioteca> {
     private SQLiteDatabase db;
 
-    // Construtor
+  
     public AlunoDAO(SQLiteDatabase db) {
         this.db = db;
     }
@@ -50,16 +50,13 @@ public class AlunoDAO implements IAlunoDAO, ICRUDDAO<AlunoBiblioteca> {
 
     @Override
     public AlunoBiblioteca buscar(AlunoBiblioteca aluno) throws SQLException {
-        // Lógica para buscar aluno
-        // (Exemplo de código, você pode adaptar para sua consulta no banco)
+
         return new AlunoBiblioteca(1, "Aluno Teste", "email@test.com");
     }
 
     @Override
     public List<AlunoBiblioteca> listar() throws SQLException {
         List<AlunoBiblioteca> alunos = new ArrayList<>();
-        // Lógica para listar os alunos do banco
-        // (Exemplo de código, você pode adaptar para sua consulta no banco)
         alunos.add(new AlunoBiblioteca(1, "Aluno Teste", "email@test.com"));
         return alunos;
     }
