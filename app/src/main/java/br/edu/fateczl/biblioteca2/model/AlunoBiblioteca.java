@@ -5,10 +5,6 @@
  */
 
 package br.edu.fateczl.biblioteca.model;
-
-/**
- * @author: ANA PAULA DE OLIVEIRA SILVA
- */
 public class AlunoBiblioteca {
     private int id;
     private String nome;
